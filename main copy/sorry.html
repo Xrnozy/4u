@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="sorry.css" />
+    <script src="antiZoomIn.js"></script>
+  </head>
+  <body>
+    <div class="firstCont" id="firstCont">
+      <div class="heart">
+        <img src="imgs/heart_left.png" alt="" class="heart-left" />
+        <div class="middle"><h1>Happy Valentines Femieeee</h1></div>
+        <img src="imgs/heart_right.png" alt="" class="heart-right" />
+      </div>
+      <h1>Hover me</h1>
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById("firstCont");
+
+    window.onmousemove = (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const xDecimal = mouseX / window.innerWidth;
+      const yDecimal = mouseY / window.innerHeight;
+
+      const maxX = container.offsetWidth - window.innerWidth;
+      const maxY = container.offsetHeight - window.innerHeight;
+
+      const panX = maxX * xDecimal;
+      const panY = maxY * yDecimal;
+
+      container.animate(
+        {
+          transform: `translate(${panX}px, ${panY}px)`,
+        },
+        {
+          duration: 400,
+          fill: "forwards",
+          easing: "ease-in",
+        }
+      );
+    };
+    const imageUrls = [
+      "https://via.placeholder.com/100/FF0000",
+      "https://via.placeholder.com/100/00FF00",
+      "https://via.placeholder.com/100/0000FF",
+      "https://via.placeholder.com/100/FFFF00",
+    ];
+
+    window.onmousemove = (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const img = document.createElement("img");
+      img.src = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+      img.classList.add("floating-img");
+      img.style.left = `${mouseX}px`;
+      img.style.top = `${mouseY}px`;
+      document.body.appendChild(img);
+
+      setTimeout(() => {
+        img.style.opacity = "0";
+        setTimeout(() => img.remove(), 1000);
+      }, 500);
+    };
+  </script>
+</html>

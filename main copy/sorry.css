@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-family: "Poppins", serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow: hidden;
+  background: #0b1522;
+  cursor: crosshair;
+}
+.firstCont {
+  height: 45vmax;
+  width: 95vmax;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+}
+.secondCont {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.heart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: heart 0.8s linear infinite;
+}
+@keyframes heart {
+  0% {
+    transform: scale(1.05);
+  }
+  80% {
+    transform: scale(0.91);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+.heart::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: #f20044;
+  border-radius: 50%;
+  filter: blur(100px);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.7;
+}
+.heart img {
+  width: 200px;
+}
+.middle {
+  width: 0;
+  min-width: 0;
+  top: 20px;
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  transition: width 2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://img.freepik.com/free-photo/paper-texture_1154-606.jpg");
+  padding: 50px 0px 50px 0px;
+  background-position: center;
+  background-size: cover;
+}
+.middle h1 {
+  text-align: center;
+  color: #ec0666;
+}
+.heart:hover .middle {
+  width: 20vw;
+}
+.floating-img {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  transition: opacity 1s ease-out;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="sorry.css" />
+    <script src="antiZoomIn.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div class="firstCont" id="firstCont">
+      <div class="heart">
+        <img src="imgs/heart_left.png" alt="" class="heart-left" />
+        <div class="middle"><h1>Happy Valentines Femieeee</h1></div>
+        <img src="imgs/heart_right.png" alt="" class="heart-right" />
+      </div>
+      <h1>Hover me</h1>
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById("firstCont");
+    const imageUrls = [
+      "imgs/1.jfif",
+      "imgs/2.jfif",
+      "imgs/3.jfif",
+      "imgs/4.jfif",
+      "imgs/5.jfif",
+    ];
+    const maxImages = 10;
+    let images = [];
+    let lastSpawnTime = 0;
+    const spawnInterval = 100;
+
+    window.onmousemove = (e) => {
+      const now = Date.now();
+      if (now - lastSpawnTime < spawnInterval) return;
+      lastSpawnTime = now;
+
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const xDecimal = mouseX / window.innerWidth;
+      const yDecimal = mouseY / window.innerHeight;
+      const maxX = container.offsetWidth - window.innerWidth;
+      const maxY = container.offsetHeight - window.innerHeight;
+      const panX = maxX * xDecimal;
+      const panY = maxY * yDecimal;
+
+      container.animate(
+        {
+          transform: `translate(${panX}px, ${panY}px)`,
+        },
+        {
+          duration: 400,
+          fill: "forwards",
+          easing: "ease-in",
+        }
+      );
+    };
+  </script>
+</html>
