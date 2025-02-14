@@ -109,3 +109,10 @@ body {
   transition: 2s ease;
   opacity: 0;
 }
+.imgCont img {
+  z-index: -1;
+}
+.img {
+  opacity: 0;
+  transition: 2s ease;
+}

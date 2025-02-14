@@ -15,7 +15,7 @@
     <div class="firstCont" id="firstCont">
       <div class="heart">
         <img src="imgs/heart_left.png" alt="" class="heart-left" />
-        <div class="middle"><h1>Happy Valentine's Femieeee</h1></div>
+        <div class="middle"><h1>Happy Valentine's Day Femieeee</h1></div>
         <img src="imgs/heart_right.png" alt="" class="heart-right" />
       </div>
       <h1>Hover me</h1>
@@ -64,11 +64,10 @@
       image.style.top = `${event.pageY - imageSize / 2}px`;
       image.style.left = `${event.pageX - imageSize / 2}px`;
       image.style.transition = "opacity 1.5s ease, transform 1.5s ease";
-      image.style.opacity = "1";
       image.style.transform =
         "scale(1) rotate(" + (Math.random() * 30 - 15) + "deg)";
       document.body.appendChild(image);
-
+      image.style.opacity = "1";
       setTimeout(() => {
         image.style.opacity = "0";
         image.style.transform = "scale(0.25) blur(10px)";
