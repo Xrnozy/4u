@@ -10,7 +10,6 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  overflow-x: hidden;
   overflow: hidden;
   background: #0b1522;
   cursor: crosshair;
@@ -63,7 +62,7 @@ body {
   filter: blur(100px);
   transform: translate(-50%, -50%);
   z-index: -1;
-  opacity: 0.7;
+  opacity: 1;
 }
 .heart img {
   width: 200px;
@@ -101,4 +100,12 @@ body {
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
   opacity: 1;
+}
+.contentImage {
+  max-width: 200px;
+  position: absolute;
+}
+.img {
+  transition: 2s ease;
+  opacity: 0;
 }

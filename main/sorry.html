@@ -10,13 +10,12 @@
     <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
     <link rel="stylesheet" href="sorry.css" />
     <script src="antiZoomIn.js"></script>
-    <style></style>
   </head>
   <body>
     <div class="firstCont" id="firstCont">
       <div class="heart">
         <img src="imgs/heart_left.png" alt="" class="heart-left" />
-        <div class="middle"><h1>Happy Valentines Femieeee</h1></div>
+        <div class="middle"><h1>Happy Valentine's Femieeee</h1></div>
         <img src="imgs/heart_right.png" alt="" class="heart-right" />
       </div>
       <h1>Hover me</h1>
@@ -24,43 +23,81 @@
   </body>
   <script>
     const container = document.getElementById("firstCont");
-    const imageUrls = [
+    const images = [
       "imgs/1.jfif",
       "imgs/2.jfif",
       "imgs/3.jfif",
       "imgs/4.jfif",
       "imgs/5.jfif",
     ];
-    const maxImages = 10;
-    let images = [];
-    let lastSpawnTime = 0;
-    const spawnInterval = 100;
+    const settings = {
+      isEnabled: false,
+      count: 0,
+      time: 50,
+    };
 
-    window.onmousemove = (e) => {
-      const now = Date.now();
-      if (now - lastSpawnTime < spawnInterval) return;
-      lastSpawnTime = now;
+    const preloadImages = () => {
+      images.forEach((img) => {
+        let link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "image";
+        link.href = img;
+        document.head.appendChild(link);
+      });
+    };
 
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+    const calcIndex = () => {
+      settings.count = (settings.count + 1) % images.length;
+      return settings.count;
+    };
 
+    const animateImages = (event) => {
+      const image = document.createElement("img");
+      const imageSize = 200;
+      const countIndex = calcIndex();
+
+      image.classList.add("hero_media");
+      image.setAttribute("src", images[countIndex]);
+      image.style.position = "absolute";
+      image.style.zIndex = -1;
+      image.style.height = `${imageSize}px`;
+      image.style.top = `${event.pageY - imageSize / 2}px`;
+      image.style.left = `${event.pageX - imageSize / 2}px`;
+      image.style.transition = "opacity 1.5s ease, transform 1.5s ease";
+      image.style.opacity = "1";
+      image.style.transform =
+        "scale(1) rotate(" + (Math.random() * 30 - 15) + "deg)";
+      document.body.appendChild(image);
+
+      setTimeout(() => {
+        image.style.opacity = "0";
+        image.style.transform = "scale(0.25) blur(10px)";
+      }, 100);
+
+      setTimeout(() => {
+        image.remove();
+      }, 500);
+    };
+
+    window.addEventListener("mousemove", (event) => {
+      if (!settings.isEnabled) {
+        settings.isEnabled = true;
+        setTimeout(() => {
+          settings.isEnabled = false;
+        }, settings.time);
+        animateImages(event);
+      }
+
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
       const xDecimal = mouseX / window.innerWidth;
       const yDecimal = mouseY / window.innerHeight;
-      const maxX = container.offsetWidth - window.innerWidth;
-      const maxY = container.offsetHeight - window.innerHeight;
-      const panX = maxX * xDecimal;
-      const panY = maxY * yDecimal;
+      const maxX = window.innerWidth - container.offsetWidth;
+      const maxY = window.innerHeight - container.offsetHeight;
+      const panX = maxX * xDecimal * -1;
+      const panY = maxY * yDecimal * -1;
 
-      container.animate(
-        {
-          transform: `translate(${panX}px, ${panY}px)`,
-        },
-        {
-          duration: 400,
-          fill: "forwards",
-          easing: "ease-in",
-        }
-      );
-    };
+      container.style.transform = `translate(${panX}px, ${panY}px)`;
+    });
   </script>
 </html>
